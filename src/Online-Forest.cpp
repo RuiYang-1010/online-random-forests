@@ -116,6 +116,8 @@ int main(int argc, char *argv[]) {
         dataset_ts.loadLIBSVM(hp.testData);
     }
 
+    string model_file_name = "train.model";
+
     // Calling training/testing
     switch (classifier) {
     case ORT: {
@@ -141,15 +143,18 @@ int main(int argc, char *argv[]) {
         if (doT2) {
             timeIt(1);
             model.trainAndTest(dataset_tr, dataset_ts);
+            model.writeForest(model_file_name);
             cout << "Training/Test time: " << timeIt(0) << endl;
         }
         if (doTraining) {
             timeIt(1);
             model.train(dataset_tr);
             cout << "Training time: " << timeIt(0) << endl;
+            model.writeForest(model_file_name);
         }
         if (doTesting) {
             timeIt(1);
+            model.loadForest(model_file_name);
             model.test(dataset_ts);
             cout << "Test time: " << timeIt(0) << endl;
         }
