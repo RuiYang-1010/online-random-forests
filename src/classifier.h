@@ -50,12 +50,17 @@ double compError(const vector<Result> &results, const DataSet &dataset) {
                   cyc_numSamples++;
                   if(dataset.m_samples[i].y != results[i].prediction){
                     cyc_numError++;
+                    std::cerr<<"-----------------------"<<std::endl;
+                    std::cerr<<"prediction of result:  "<<results[i].prediction<<std::endl;
+                    std::cerr<<"confidence of result:  "<<results[i].confidence[0]<<std::endl;
+                    std::cerr<<"confidence of result:  "<<results[i].confidence[1]<<std::endl;
+                    std::cerr<<"confidence of result:  "<<results[i].confidence[2]<<std::endl;
                   }
                 }
         }
-        std::cerr<<"ped_numError:  "<<ped_numError<<std::endl;
-        std::cerr<<"ped_numSamples:  "<<ped_numSamples<<std::endl;
-        return ped_numError / ped_numSamples;
+        std::cerr<<"numError:  "<<cyc_numError<<std::endl;
+        std::cerr<<"numSamples:  "<<cyc_numSamples<<std::endl;
+        return cyc_numError / cyc_numSamples;
         //return error / dataset.m_numSamples;
 }
 
